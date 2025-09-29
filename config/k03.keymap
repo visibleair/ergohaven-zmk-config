@@ -12,21 +12,104 @@
             #sensor-binding-cells = <0>;
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
         };
+
+        en_space: en_space {
+            compatible = "zmk,behavior-mod-morph";
+            label = "EN_SPACE";
+            bindings = <&kp SPACE>, <&layer_en>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LGUI)>;
+        };
+
+        ru_space: ru_space {
+            compatible = "zmk,behavior-mod-morph";
+            label = "RU_SPACE";
+            bindings = <&kp SPACE>, <&layer_ru>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LGUI)>;
+        };
+    };
+
+    macros {
+        layer_en: layer_en {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to_en &to 0>;
+            label = "LAYER_EN";
+        };
+
+        layer_ru: layer_ru {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to_ru &to 1>;
+            label = "LAYER_RU";
+        };
+
+        en: to_en {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings =
+                <&to_en>,
+                <&macro_press>,
+                <&macro_param_1to1 &kp MACRO_PLACEHOLDER>,
+                <&macro_pause_for_release>,
+                <&macro_release>,
+                <&macro_param_1to1 &kp MACRO_PLACEHOLDER>,
+                <&macro_tap>,
+                <&to_ru>;
+
+            label = "TO_EN";
+        };
+
+        to_en: lg_tog {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(N1))>;
+            label = "LG_TOG";
+        };
+
+        to_ru: to_ru {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(NUMBER_2))>;
+            label = "TO_RU";
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        base {
+        en {
             bindings = <
-&kp ESC    &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
-&kp TAB    &kp Q   &kp W     &kp E     &kp R      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
+&kp ESC    &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                             &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
+&kp TAB    &kp Q   &kp W     &kp E     &kp R      &kp T                              &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&layer_ru  &kp A   &kp S     &kp D     &kp F      &kp G                              &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp LBKT        &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 2   &kp RU_SPACE    &kp ENTER  &mo 3   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             display-name = "Base";
+            sensor-bindings =
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>;
+        };
+
+        ru {
+            display-name = "Base";
+            bindings = <
+&kp ESC    &kp N1                   &kp N2                &kp N3              &kp N4              &kp N5                                      &kp N6              &kp N7                     &kp N8               &kp N9                 &kp N0              &kp BSPC
+&kp TAB    &kp RU_CYRILLIC_SHORT_I  &kp RU_CYRILLIC_TSE   &kp E               &kp RU_CYRILLIC_KA  &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA  &kp RU_CYRILLIC_SHCHA  &kp RU_CYRILLIC_ZE  &kp BSLH
+&layer_en  &kp RU_CYRILLIC_EF       &kp RU_CYRILLIC_YERU  &kp RU_CYRILLIC_VE  &kp RU_CYRILLIC_A   &kp RU_CYRILLIC_PE                          &kp RU_CYRILLIC_ER  &kp RU_CYRILLIC_O          &kp RU_CYRILLIC_EL   &kp RU_CYRILLIC_DE     &kp SEMI            &kp SQT
+&kp LSHFT  &kp RU_CYRILLIC_YA       &kp RU_CYRILLIC_CHE   &kp RU_CYRILLIC_ES  &kp RU_CYRILLIC_EM  &kp RU_CYRILLIC_I   &kp LBKT     &kp RBKT   &kp RU_CYRILLIC_TE  &kp RU_CYRILLIC_SOFT_SIGN  &kp RU_CYRILLIC_BE   &kp RU_CYRILLIC_YU     &kp FSLH            &kp RSHFT
+                                    &kp LGUI              &kp LALT            &kp LCTRL           &mo 2               &kp SPACE    &kp ENTER  &mo 4               &kp RCTRL                  &kp RU_CYRILLIC_HA   &kp RGUI
+            >;
+
             sensor-bindings =
                 <&enc_vol>,
                 <&enc_vol>,
@@ -42,22 +125,33 @@
 &trans  &trans  &kp HOME      &kp UP    &kp END        &kp INS                    &kp PG_UP        &kp N7  &kp N8  &kp N9   &trans   &trans
 &trans  &trans  &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                    &kp PG_DN        &kp N4  &kp N5  &kp N6   &trans   &trans
 &trans  &trans  &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &trans    &trans  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &trans   &trans
-                &trans        &trans    &trans         &trans   &trans    &trans  &mo 3            &trans  &kp N0  &trans
+                &trans        &trans    &trans         &trans   &trans    &trans  &mo 5            &trans  &kp N0  &trans
             >;
 
             display-name = "Navigation";
         };
 
-        sym {
+        sym_en {
             bindings = <
-&trans  &trans    &kp AT    &kp DLLR   &kp HASH  &trans                       &trans     &trans    &kp CARET  &trans    &trans    &trans
-&trans  &trans    &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                    &trans     &kp LBKT  &kp UNDER  &kp RBKT  &trans    &trans
-&trans  &kp BSLH  &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                     &kp PRCNT  &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL  &trans
-&trans  &trans    &kp STAR  &kp COLON  &kp FSLH  &trans     &trans    &trans  &trans     &kp PIPE  &kp TILDE  &kp AMPS  &trans    &trans
-                  &trans    &trans     &trans    &mo 3      &trans    &trans  &trans     &trans    &trans     &trans
+&trans  &trans     &trans    &trans     &trans    &trans                           &trans       &trans    &trans     &trans    &trans      &trans
+&trans  &kp TILDE  &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                        &kp CARET    &kp LBKT  &kp UNDER  &kp RBKT  &kp DOLLAR  &trans
+&trans  &kp BSLH   &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                         &kp PRCNT    &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL    &trans
+&trans  &kp HASH   &kp STAR  &kp COLON  &kp FSLH  &kp AMPERSAND  &trans    &trans  &kp AT_SIGN  &kp PIPE  &kp COMMA  &kp DOT   &kp QMARK   &trans
+                   &trans    &trans     &trans    &mo 5          &trans    &trans  &trans       &trans    &trans     &trans
             >;
 
             display-name = "Symbols";
+        };
+
+        sym_ru {
+            display-name = "Symbols";
+            bindings = <
+&trans  &trans            &trans                   &trans        &trans                    &trans                           &trans          &trans    &trans             &trans      &trans              &trans
+&trans  &en TILDE         &en LT                   &kp RU_EQUAL  &en GT                    &en GRAVE                        &en CARET       &en LBKT  &kp RU_UNDERSCORE  &en RBKT    &en DOLLAR          &trans
+&trans  &kp RU_BACKSLASH  &kp RU_LEFT_PARENTHESIS  &kp RU_MINUS  &kp RU_RIGHT_PARENTHESIS  &kp RU_PLUS                      &kp RU_PERCENT  &en LBRC  &kp RU_SEMICOLON   &en RBRC    &kp RU_EXCLAMATION  &trans
+&trans  &en HASH          &kp RU_STAR              &kp RU_COLON  &kp RU_SLASH              &en AMPERSAND  &trans    &trans  &en AT_SIGN     &en PIPE  &kp RU_COMMA       &kp RU_DOT  &kp RU_QUESTION     &trans
+                          &trans                   &trans        &trans                    &mo 5          &trans    &trans  &trans          &trans    &trans             &trans
+            >;
         };
 
         adj {
@@ -70,6 +164,25 @@
             >;
 
             display-name = "Adjust";
+        };
+
+        game {
+            display-name = "Base";
+            bindings = <
+&kp ESC    &kp N1          &kp N2    &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
+&kp T      &kp TAB         &kp Q     &kp W     &kp E      &kp R                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&kp G      &kp LEFT_SHIFT  &kp A     &kp S     &kp D      &kp F                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp LCTRL       &kp Z     &kp X     &kp C      &kp V   &kp B        &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                           &kp LGUI  &kp LALT  &kp LCTRL  &mo 2   &kp SPACE    &kp ENTER  &mo 3   &kp RCTRL  &kp RALT   &kp RGUI
+            >;
+
+            sensor-bindings =
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>;
         };
     };
 };
