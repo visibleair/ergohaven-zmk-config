@@ -90,7 +90,7 @@
                    &kp LGUI  &kp LALT  &kp LCTRL  &mo 2   &kp RU_SPACE    &kp ENTER  &mo 3   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
-            display-name = "Base";
+            display-name = "Base EN";
             sensor-bindings =
                 <&enc_vol>,
                 <&enc_vol>,
@@ -101,7 +101,7 @@
         };
 
         ru {
-            display-name = "Base";
+            display-name = "Base RU";
             bindings = <
 &kp ESC    &kp N1                   &kp N2                &kp N3              &kp N4              &kp N5                                      &kp N6              &kp N7                     &kp N8               &kp N9                 &kp N0              &kp BSPC
 &kp TAB    &kp RU_CYRILLIC_SHORT_I  &kp RU_CYRILLIC_TSE   &kp E               &kp RU_CYRILLIC_KA  &kp RU_CYRILLIC_IE                          &kp RU_CYRILLIC_EN  &kp RU_CYRILLIC_GHE        &kp RU_CYRILLIC_SHA  &kp RU_CYRILLIC_SHCHA  &kp RU_CYRILLIC_ZE  &kp BSLH
@@ -140,11 +140,11 @@
                    &trans    &trans     &trans    &mo 5          &trans    &trans  &trans       &trans    &trans     &trans
             >;
 
-            display-name = "Symbols";
+            display-name = "Symbols EN";
         };
 
         sym_ru {
-            display-name = "Symbols";
+            display-name = "Symbols RU";
             bindings = <
 &trans  &trans            &trans                   &trans        &trans                    &trans                           &trans          &trans    &trans             &trans      &trans              &trans
 &trans  &en TILDE         &en LT                   &kp RU_EQUAL  &en GT                    &en GRAVE                        &en CARET       &en LBKT  &kp RU_UNDERSCORE  &en RBKT    &en DOLLAR          &trans
@@ -166,14 +166,33 @@
             display-name = "Adjust";
         };
 
-        game {
-            display-name = "Base";
+        game_en {
+            display-name = "Game EN";
             bindings = <
 &kp ESC    &kp N1          &kp N2  &kp N3    &kp N4  &kp N5                                &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
 &kp T      &kp TAB         &kp Q   &kp W     &kp E   &kp R                                 &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp G      &kp LEFT_SHIFT  &kp A   &kp S     &kp D   &kp F                                 &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp LCTRL       &kp Z   &kp X     &kp C   &kp V         &kp B        &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
                            &to 0   &kp LALT  &kp T   &kp LEFT_ALT  &kp SPACE    &kp ENTER  &mo 3   &kp RCTRL  &kp RALT   &kp RGUI
+            >;
+
+            sensor-bindings =
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>,
+                <&enc_vol>;
+        };
+
+        game_ru {
+            display-name = "Game RU";
+            bindings = <
+&kp ESC    &kp N1          &kp N2  &kp N3    &kp N4  &kp N5                                &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
+&kp T      &kp TAB         &kp Q   &kp W     &kp E   &kp R                                 &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
+&kp G      &kp LEFT_SHIFT  &kp A   &kp S     &kp D   &kp F                                 &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp LCTRL       &kp Z   &kp X     &kp C   &kp V         &kp B        &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                           &to 1   &kp LALT  &kp T   &kp LEFT_ALT  &kp SPACE    &kp ENTER  &mo 3   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             sensor-bindings =
