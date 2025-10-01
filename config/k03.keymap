@@ -66,14 +66,14 @@
         to_en: lg_tog {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(LS(N1))>;
+            bindings = <&kp LS(LA(N1))>;
             label = "LG_TOG";
         };
 
         to_ru: to_ru {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(LS(NUMBER_2))>;
+            bindings = <&kp LS(LA(NUMBER_2))>;
             label = "TO_RU";
         };
     };
@@ -148,7 +148,7 @@
             bindings = <
 &trans  &trans            &trans                   &trans        &trans                    &trans                           &trans          &trans    &trans             &trans      &trans              &trans
 &trans  &en TILDE         &en LT                   &kp RU_EQUAL  &en GT                    &en GRAVE                        &en CARET       &en LBKT  &kp RU_UNDERSCORE  &en RBKT    &en DOLLAR          &trans
-&trans  &kp RU_BACKSLASH  &kp RU_LEFT_PARENTHESIS  &kp RU_MINUS  &kp RU_RIGHT_PARENTHESIS  &kp RU_PLUS                      &kp RU_PERCENT  &en LBRC  &kp RU_SEMICOLON   &en RBRC    &kp RU_EXCLAMATION  &kp RU_DOUBLE_QUOTES
+&trans  &kp RU_BACKSLASH  &kp RU_LEFT_PARENTHESIS  &kp RU_MINUS  &kp RU_RIGHT_PARENTHESIS  &kp RU_PLUS                      &kp RU_PERCENT  &en LBRC  &kp RU_SEMICOLON   &en RBRC    &kp RU_EXCLAMATION  &kp RU_DQT
 &trans  &en HASH          &kp RU_STAR              &kp RU_COLON  &kp RU_SLASH              &en AMPERSAND  &trans    &trans  &en AT_SIGN     &en PIPE  &kp RU_COMMA       &kp RU_DOT  &kp RU_QUESTION     &trans
                           &trans                   &trans        &trans                    &mo 5          &trans    &trans  &trans          &trans    &trans             &trans
             >;
